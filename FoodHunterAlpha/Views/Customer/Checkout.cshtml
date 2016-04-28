@@ -1,0 +1,106 @@
+﻿@using FoodHunterAlpha.Models;
+@{
+    Restaurant _store = (Restaurant)ViewBag.Store;
+    if (_store == null)
+    {
+        var lastStore = Request.Cookies["LastVisitedStoreNameId"]?.Value;
+        if (!string.IsNullOrEmpty(lastStore))
+        {
+            _store = Store.Get(lastStore);
+        }
+    }
+}
+<div class="page-content">
+    <div class="checkout-item" ng-repeat="item in storeCtrl.cart.itms track by item.i">
+        <div class="checkout-item-desc">
+            <span class="desc-name">{{item.n}}</span>
+            <span class="desc-option">Regual</span>
+            <span class="desc-unit-price">{{item.p|currency:$}}</span>
+            <span class="desc-qty">x{{item.q}}</span>
+        </div>
+        <div class="checkout-item-total-price">{{item.p*item.q|currency:$}}</div>
+    </div>
+    <div class="checkout-total">
+        <span class="desc-name">Total</span>
+        <div class="total-price">{{storeCtrl.cart.amt|currency:$}}</div>
+    </div>
+    <div class="checkout-opt-selector">
+        @using (Html.BeginForm("pay", "customer", FormMethod.Post))
+        {
+
+            <div class="checkout-opt-header">
+                <div id="option_dine_ine" class="checkout-opt opt-dine-in">Dine In</div>
+                <div id="option_pick_up" class="checkout-opt opt-pick-up">Pick Up</div>
+                <input type="hidden" id="option_type" name="option_type" value="dine-in" />
+            </div>
+            <div id="option_body" class="checkout-opt-body dine-in">
+                <span class="store_name">
+                    <span class="glyphicon glyphicon-map-marker"></span>@_store.Name
+                    <a href="/store/map">change</a>
+                    <input type="hidden" id="store_id" name="store_id" value="@_store.Id" />
+                </span>
+                <div>
+                    <span id="option_type_text">Table No.</span>
+                    <select id="option_value" name="option_value"></select>
+                </div>
+                <div class="payment-memo">
+                    *accpet Credit Card and Bank Account
+                </div>
+                <button type="submit" class="btn btn-warning checkout-btn-pay">Confirm and To Pay</button>
+            </div>
+        }
+    </div>
+    <div class="checkout-footer">
+        Powered by FoodHunters.net
+    </div>
+</div>
+@section script{
+    <script>
+        $(function () {
+            function fillTableNo() {
+                var $dpl = $("#option_value");
+                $dpl.empty();
+                for (var i = 1; i <= 50; i++) {
+                    $dpl.append($("<option value='" + i + "'>" + i + "</option>"));
+                }
+            }
+            function fillTime() {
+                var times = [{ min: 10, show: '10 Mins' }, { min: 20, show: '20 Mins' }, { min: 30, show: '30 Mins' },
+                             { min: 45, show: '45 Mins' }, { min: 60, show: '1 Hour' }, { min: 90, show: '1.5 Hours' },
+                             { min: 120, show: '2 Hours' }];
+                var $dpl = $("#option_value");
+                $dpl.empty();
+
+                $.each(times, function (idx, time) {
+                    $dpl.append($("<option value='" + time.min + "'>" + time.show + "</option>"));
+                });
+            }
+            function optionChange(type) {
+                var optType = $("#option_type");
+                if (type == optType.val()) {
+                    return;
+                }
+
+                optType.val(type);
+                if (type === 'dine-in') {
+                    //change color
+                    $("#option_body").removeClass("pick-up").addClass("dine-in");
+                    //change number text
+                    $("#option_type_text").text("Table No.");
+                    //fill select
+                    fillTableNo();
+                } else if (type === 'pick-up') {
+                    //change colorhe
+                    $("#option_body").removeClass("dine-in").addClass("pick-up");
+                    //change number text
+                    $("#option_type_text").text("After Approx.");
+                    //fill select
+                    fillTime();
+                }
+            }
+            fillTableNo();
+            $("#option_dine_ine").click(function () { optionChange('dine-in'); });
+            $("#option_pick_up").click(function () { optionChange('pick-up'); });
+        });
+    </script>
+}

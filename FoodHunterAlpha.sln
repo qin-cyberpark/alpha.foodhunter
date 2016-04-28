@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodHunterAlpha", "FoodHunterAlpha\FoodHunterAlpha.csproj", "{5298407A-8DD6-4D88-87CE-892ABF7E2FF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodHunterAlpha.Tests", "FoodHunterAlpha.Tests\FoodHunterAlpha.Tests.csproj", "{665451C1-8AE1-4AB8-8910-A18EF036F7CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5298407A-8DD6-4D88-87CE-892ABF7E2FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5298407A-8DD6-4D88-87CE-892ABF7E2FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5298407A-8DD6-4D88-87CE-892ABF7E2FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5298407A-8DD6-4D88-87CE-892ABF7E2FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{665451C1-8AE1-4AB8-8910-A18EF036F7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665451C1-8AE1-4AB8-8910-A18EF036F7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665451C1-8AE1-4AB8-8910-A18EF036F7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665451C1-8AE1-4AB8-8910-A18EF036F7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
