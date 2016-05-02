@@ -8,39 +8,24 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify");
 
 
-var paths = {
-    content: "./Content/"
-};
+var contentPath = "./Content/";
+var fileGroups = [{ src: "js/customer/**/*.js", exclude: "js/customer/**/*.min.js", dest: "dist/js/site-customer.min.js" },
+                  { src: "css/customer/**/*.css", exclude: "css/customer/**/*.min.css", dest: "dist/css/site-customer.min.css" },
+                  { src: "js/counter/**/*.js", exclude: "js/counter/**/*.min.js", dest: "dist/js/site-counter.min.js" },
+                  { src: "css/counter/**/*.css", exclude: "css/counter/**/*.min.css", dest: "dist/css/site-counter.min.css" }];
 
-paths.js = paths.content + "js/customer/**/*.js";
-paths.minJs = paths.content + "js/customer/**/*.min.js";
-paths.css = paths.content + "css/customer/**/*.css";
-paths.minCss = paths.content + "css/customer/**/*.min.css";
-paths.concatJsDest = paths.content + "dist/js/site.min.js";
-paths.concatCssDest = paths.content + "dist/css/site.min.css";
-
-gulp.task("clean:js", function (cb) {
-    rimraf(paths.concatJsDest, cb);
+gulp.task("clean", function (cb) {
+    for (var i = 0; i < fileGroups.length; i++) {
+        rimraf(contentPath + fileGroups[i].dest, cb);
+    }
 });
 
-gulp.task("clean:css", function (cb) {
-    rimraf(paths.concatCssDest, cb);
+
+gulp.task("min", function () {
+    for (var i = 0; i < fileGroups.length; i++) {
+        gulp.src([contentPath + fileGroups[i].src, "!" + contentPath + fileGroups[i].exclude])
+                .pipe(concat(contentPath + fileGroups[i].dest))
+                .pipe(cssmin())
+                .pipe(gulp.dest("."));
+    }
 });
-
-gulp.task("clean", ["clean:js", "clean:css"]);
-
-gulp.task("min:js", function () {
-    return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
-        .pipe(concat(paths.concatJsDest))
-        .pipe(uglify())
-        .pipe(gulp.dest("."));
-});
-
-gulp.task("min:css", function () {
-    return gulp.src([paths.css, "!" + paths.minCss])
-        .pipe(concat(paths.concatCssDest))
-        .pipe(cssmin())
-        .pipe(gulp.dest("."));
-});
-
-gulp.task("min", ["min:js", "min:css"]);

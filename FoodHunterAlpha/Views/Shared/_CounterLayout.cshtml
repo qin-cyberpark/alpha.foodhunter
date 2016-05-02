@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html  ng-app="food-hunters-counter">
+<html ng-app="food-hunters-counter">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -26,12 +26,12 @@
     <div class="page" ng-controller="counterController as cntrCtrl" ng-init="cntrCtrl.init()">
         <div class="left-side-bar">
             <div class="menu-item">Orders</div>
-            <hr/>
+            <hr />
             <div class="menu-item">Statistic</div>
         </div>
         <div class="content">
             <div class="top-bar">
-                <a id="left-side-bar-toggle" href="#"><img src="~/Content/img/columbus/logo-blk.png" /></a>
+                <a id="left-side-bar-toggle"><img src="~/Content/img/columbus/logo-blk.png" /></a>
             </div>
             <div class="main-content">
                 @RenderBody()
@@ -54,6 +54,8 @@
         <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.2.min.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <script src="~/Content/lib/plug-in/jquery.signalR-2.2.0.min.js"></script>
+        <script src="/signalr/hubs"></script>
         <script src="~/Content/dist/js/site-counter.min.js"></script>
     }
     <!-- Menu Toggle Script -->

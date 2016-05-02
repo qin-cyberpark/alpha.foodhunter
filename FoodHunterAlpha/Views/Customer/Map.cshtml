@@ -86,7 +86,7 @@
 
                 //marker info
                 marker.addListener('click', function () {
-                    infowindow.setContent('<div class="map-marker-info">' + store.name + '<a href="/store/' + store.nameId + '">Select</a></div>');
+                    infowindow.setContent('<div class="map-marker-info">' + store.name + '<a onclick="window.location=\'/store/' + store.nameId + '\'">Select</a></div>');
                     infowindow.open(map, marker);
 
                 });
