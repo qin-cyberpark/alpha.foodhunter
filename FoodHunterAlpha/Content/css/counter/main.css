@@ -1,0 +1,93 @@
+﻿html, body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #d8d8d8;
+}
+
+a,
+a:link,
+a:hover,
+a:visited {
+    text-decoration: none;
+}
+
+.btn-main {
+    color: #000;
+    background-color: #ffca00;
+    border-color: #e6b600;
+}
+
+/* sidebar-main layout */
+.left-side-bar {
+    z-index: 1000;
+    position: fixed;
+    left: -200px;
+    width: 200px;
+    height: 100%;
+    background: #000;
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.content {
+    position: fixed;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+    background-image: url(/Content/img/columbus/bg.png);
+}
+
+.page.toggled .left-side-bar {
+    left: 0px;
+}
+
+.page.toggled .content {
+    margin-left: 200px;
+}
+
+.content .top-bar {
+    width: 100%;
+    height: 40px;
+    background-color: #ffca00;
+    padding: 1px 5px 1px 5px;
+}
+
+    .content .top-bar img {
+        height: 35px;
+    }
+
+.content .main-content {
+    width: 100%;
+    height: 100%;
+}
+
+/*slide bar*/
+.left-side-bar {
+    padding: 5px;
+    color: #d8d8d8;
+}
+
+    .left-side-bar .menu-item {
+        font-size: 24px;
+        width: 100%;
+    }
+
+    .left-side-bar hr {
+        height: 1px;
+        color: #d8d8d8;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }

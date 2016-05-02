@@ -249,6 +249,7 @@ namespace FoodHunterAlpha.Models
 
         private static SortedList<string, Restaurant> _storesByName;
         private static SortedList<long, Restaurant> _storesById;
+        private static SortedList<long, Item> _itemsById;
         static Store()
         {
             InitStores();
@@ -258,10 +259,18 @@ namespace FoodHunterAlpha.Models
         {
             _storesByName = new SortedList<string, Restaurant>();
             _storesById = new SortedList<long, Restaurant>();
+            _itemsById = new SortedList<long, Item>();
 
             using (var db = new Entities())
             {
                 var rest = Restaurant.Get(db, DefaultRestaurantId);
+                foreach (var cate in rest.Categories)
+                {
+                    foreach(var item in cate.Items)
+                    {
+                        _itemsById.Add(item.Id, item);
+                    }
+                }
                 for (int idx = 0; idx < storeData.Length; idx++)
                 {
                     var arr = storeData[idx];
@@ -321,6 +330,21 @@ namespace FoodHunterAlpha.Models
             if (_storesById.ContainsKey(idx))
             {
                 return _storesById[idx];
+            }
+
+            return null;
+        }
+
+        public static Item GetItem (long id)
+        {
+            if(_itemsById == null)
+            {
+                InitStores();
+            }
+
+            if (_itemsById.ContainsKey(id))
+            {
+                return _itemsById[id];
             }
 
             return null;

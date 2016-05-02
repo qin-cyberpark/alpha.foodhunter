@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FoodHunterAlpha.Models;
+using Newtonsoft.Json;
+
 namespace FoodHunterAlpha.Controllers
 {
     public class CustomerController : Controller
@@ -66,7 +68,9 @@ namespace FoodHunterAlpha.Controllers
 
             //create order
             var order = new Order();
-            order.Id = Order.GetNextOrderId();
+            order.SerialNo = Order.GetNextOrderSerialNo(storeId);
+            order.Id = string.Format("{0:0000}{1:yyyyMMdd}{2:0000}", storeId, DateTime.Today, order.SerialNo);
+
             order.Type = ordType;
             if (order.Type == Order.OrderType.Pickup)
             {
@@ -79,8 +83,19 @@ namespace FoodHunterAlpha.Controllers
             order.CustomerId = Store.DefaultCustomerId;
             order.Store = Store.Get(storeId);
 
-            Order.Add(order);
+            //item
+            var cart = JsonConvert.DeserializeObject<ViewModels.CartVM>(orderRawData);
+            foreach(var itm in cart.Items)
+            {
+                var nwItm = Store.GetItem(itm.Id);
+                order.Items.Add(new OrderItem()
+                {
+                    Item = nwItm,
+                    Quantity = itm.Quantity
+                });
+            }
 
+            Order.Add(order);
 
             if (Request.Cookies["cart"] != null)
             {
@@ -88,6 +103,9 @@ namespace FoodHunterAlpha.Controllers
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(myCookie);
             }
+
+            //push order
+            MessageCenter.LoadOrderQueue();
 
             return RedirectToAction("YourOrders");
         }

@@ -5,35 +5,54 @@ using System.Web;
 
 namespace FoodHunterAlpha.Models
 {
+    public class OrderItem
+    {
+        public Item Item { get; set; }
+        public int Quantity { get; set; }
+    }
     public class Order
     {
         public enum OrderType
         {
             DineIn, Pickup
         }
-        public int Id { get; set; }
+        public string Id { get; set; }
+        public int SerialNo { get; set; }
         public OrderType Type { get; set; }
         public string CustomerId { get; set; }
         public Restaurant Store { get; set; }
-        public IList<Item> Items { get; set; }
+        public IList<OrderItem> Items { get; set; } = new List<OrderItem>();
         public DateTime OrderTime { get; set; } = DateTime.Now;
         public int TableNumber { get; set; }
-        public DateTime PickupTime { get; set; } 
-        public bool HasProcessed { get; set; }
+        public DateTime PickupTime { get; set; }
+        public bool HasCompleted { get; set; }
+        public DateTime PrintTime
+        {
+            get
+            {
+                if (Type == OrderType.DineIn)
+                {
+                    return OrderTime;
+                }
+                else
+                {
+                    return PickupTime.AddMinutes(-10);
+                }
+            }
+        }
+
 
         //static
-        private static SortedList<int, Order> _orders = new SortedList<int, Order>();
+        private static SortedList<string, Order> _orders = new SortedList<string, Order>();
         private static object _locker = new object();
 
-        public static int GetNextOrderId()
+        public static int GetNextOrderSerialNo(int storeId)
         {
             lock (_locker)
             {
-                if (_orders.Count == 0)
-                {
-                    return 1000;
-                }
-                return _orders.Keys.Max() + 1;
+                int currSn = _orders.Values.OrderByDescending(x => x.OrderTime)
+                            .FirstOrDefault(x=>x.OrderTime.Date == DateTime.Today)?.SerialNo ?? 0;
+                return ++currSn;
             }
         }
 
@@ -43,25 +62,41 @@ namespace FoodHunterAlpha.Models
             Clear();
         }
 
-        public static Order GetOrder(int orderId)
+        public static Order GetOrder(string id)
         {
-            if (_orders.ContainsKey(orderId))
+            if (_orders.ContainsKey(id))
             {
-                return _orders[orderId];
+                return _orders[id];
             }
 
             return null;
         }
 
+        public static bool CompleteOrder(string id)
+        {
+            if (_orders.ContainsKey(id))
+            {
+                _orders[id].HasCompleted = true;
+                return true;
+            }
+
+            return false;
+        }
         public static IList<Order> GetOrder()
         {
-            return _orders.Values.OrderByDescending(x=>x.OrderTime).ToList();
+            return _orders.Values.OrderBy(x => x.PrintTime).ToArray();
+        }
+
+        public static IList<string> GetOrderIds(int restId, bool hasCompleted = false)
+        {
+            return _orders.Values.Where(x=>x.HasCompleted == hasCompleted)
+                .OrderBy(x => x.PrintTime).Select(x => x.Id).ToList();
         }
 
         private static void Clear()
         {
             var len = _orders.Count;
-            for (int i = 0; i < len - 10; i++)
+            for (int i = 0; i < len - 50; i++)
             {
                 _orders.RemoveAt(0);
             }

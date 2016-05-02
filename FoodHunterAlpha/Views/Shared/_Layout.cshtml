@@ -16,6 +16,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
@@ -23,11 +24,11 @@
     @if (HttpContext.Current.IsDebuggingEnabled)
     {
         <link rel="stylesheet" href="~/Content/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/Content/css/main.css" />
-        <link rel="stylesheet" href="~/Content/css/menu.css" />
-        <link rel="stylesheet" href="~/Content/css/checkout.css" />
-        <link rel="stylesheet" href="~/Content/css/cart.css" />
-        <link rel="stylesheet" href="~/Content/css/my-order.css" />
+        <link rel="stylesheet" href="~/Content/css/customer/main.css" />
+        <link rel="stylesheet" href="~/Content/css/customer/menu.css" />
+        <link rel="stylesheet" href="~/Content/css/customer/checkout.css" />
+        <link rel="stylesheet" href="~/Content/css/customer/cart.css" />
+        <link rel="stylesheet" href="~/Content/css/customer/my-order.css" />
     }
     else
     {
@@ -84,7 +85,7 @@
         <a href="/cart" class="nav-btn @("Cart".Equals(ViewBag.PageName)?"active":"")">
             <span class="btn-label">Meal</span>
             <span class="glyphicon glyphicon-cutlery btn-icon">
-                <span class="badge badge-badge" ng-if="storeCtrl.cart.qty>0">{{storeCtrl.cart.qty}}</span>
+                <span class="badge badge-amount" ng-if="storeCtrl.cart.qty>0">{{storeCtrl.cart.qty}}</span>
             </span>
         </a>
         <div class="dropdown nav-dropdown">
@@ -94,7 +95,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="#">Your Account</a></li>
-                <li><a href="/account/order">Your Orders</a></li>
+                <li><a href="/yourorders">Your Orders</a></li>
                 <li><hr style="margin:0px;" /></li>
                 <li><a href="#">Not Demo? Sign Out</a></li>
             </ul>
@@ -109,9 +110,9 @@
         <script src="~/Content/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/Content/lib/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="~/Content/lib/angular/angular.min.js"></script>
-        <script src="~/Content/js/main.js"></script>
-        <script src="~/Content/js/controllers/store-controller.js"></script>
-        <script src="~/Content/js/controllers/item-controller.js"></script>
+        <script src="~/Content/js/customer/main.js"></script>
+        <script src="~/Content/js/customer/controllers/store-controller.js"></script>
+        <script src="~/Content/js/customer/controllers/item-controller.js"></script>
     }
     else
     {

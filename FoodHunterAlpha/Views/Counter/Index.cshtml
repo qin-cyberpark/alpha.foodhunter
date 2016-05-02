@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_CounterLayout.cshtml";
+}
+<div class="order-content" ng-if="cntrCtrl.currentOrder">
+    <div class="row">
+        <div class="col-xs-8 order-number">
+            No. {{cntrCtrl.currentOrder.id.substr(0,cntrCtrl.currentOrder.id.length-4)}}<span class="order-number-tail">{{cntrCtrl.currentOrder.id.substr(-4)}}</span>
+            <span class="order-time">{{cntrCtrl.currentOrder.orderTime|date:'h:mm a'}}</span>
+        </div>
+        <div class="col-xs-4 order-owner" ng-if="cntrCtrl.currentOrder.type==0">
+            Table: <span>{{cntrCtrl.currentOrder.tableNumber}}</span>
+        </div>
+        <div class="col-xs-4 order-owner" ng-if="cntrCtrl.currentOrder.type==1">
+            Pick Up: <span>{{cntrCtrl.currentOrder.pickupTime|date:'h:mm a'}}</span>
+        </div>
+    </div>
+    <div class="order-detail">
+        <div class="detail-item" ng-repeat="item in cntrCtrl.currentOrder.items">
+            <div class="item-idx">{{$index+1}}</div>
+            <div class="item-name">{{item.item.description}}</div>
+            <div class="item-opt">regular</div>
+            <div class="item-amount" ng-if="item.quantity>1">{{item.quantity}}</div>
+        </div>
+    </div>
+    <div class="order-button">
+        <button class="btn btn-main" ng-click="cntrCtrl.completeOrder(cntrCtrl.currentOrder.id)">Done</button>
+    </div>
+</div>
+<div class="order-queue">
+    <div class="queue-title">
+        Queue<span class="badge badge-badge bg-red" ng-if="cntrCtrl.orderIdsInQueue && cntrCtrl.orderIdsInQueue.length > 0">{{cntrCtrl.orderIdsInQueue.length}}</span>
+    </div>
+    <div class="queue-content">
+        <div class="order-number" ng-repeat="num in cntrCtrl.orderIdsInQueue">
+            <a href="#" ng-click="cntrCtrl.loadOrder(num)">{{num.substr(-4)}}</a>
+        </div>
+    </div>
+</div>

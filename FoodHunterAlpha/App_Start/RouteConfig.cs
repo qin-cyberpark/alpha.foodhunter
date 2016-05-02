@@ -12,7 +12,11 @@ namespace FoodHunterAlpha
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+              name: "counter",
+              url: "counter/{action}/{id}",
+              defaults: new { controller = "Counter", action = "Index", id = UrlParameter.Optional }
+            );
             routes.MapRoute(
                 name: "Store",
                 url: "store/{name}/{action}/{id}",

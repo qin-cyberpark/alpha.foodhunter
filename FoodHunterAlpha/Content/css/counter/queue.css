@@ -1,0 +1,143 @@
+﻿/* order contain*/
+.order-content {
+    position: absolute;
+    padding: 5px;
+    left: 0px;
+    right: 100px;
+    top: 40px;
+    bottom: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+    .order-content .order-number {
+        font-size: 40px;
+        font-weight: bold;
+        color: #000;
+    }
+
+        .order-content .order-number .order-number-tail {
+            color: #d9534f;
+        }
+
+        .order-content .order-number .order-time {
+            color: #000;
+            font-size: 20px;
+        }
+
+    .order-content .order-owner {
+        font-size: 20px;
+        vertical-align: bottom;
+        text-align: right;
+        font-weight: bold;
+    }
+
+        .order-content .order-owner > span {
+            font-size: 40px;
+            color: #d9534f;
+        }
+
+
+    .order-content .order-detail {
+        padding-left: 80px;
+        min-height: 460px;
+    }
+
+        .order-content .order-detail .detail-item {
+        }
+
+            .order-content .order-detail .detail-item > div {
+                display: inline-block;
+            }
+
+            .order-content .order-detail .detail-item .item-idx {
+                width: 30px;
+                font-size: 20px;
+                text-align: right;
+            }
+
+                .order-content .order-detail .detail-item .item-idx:after {
+                    content: ".";
+                }
+
+            .order-content .order-detail .detail-item .item-name {
+                margin-left: 10px;
+                font-size: 36px;
+                font-weight: bold;
+            }
+
+            .order-content .order-detail .detail-item .item-opt {
+                margin-left: 10px;
+                font-size: 30px;
+                color: #6D6D6D;
+            }
+
+
+            .order-content .order-detail .detail-item .item-amount {
+                margin-left: 10px;
+                font-size: 30px;
+                color: #d9534f;
+            }
+
+                .order-content .order-detail .detail-item .item-amount:before {
+                    content: "x";
+                }
+
+.order-button {
+    width:100%;
+    margin-top: 30px;
+    text-align: right;
+}
+
+    .order-button > button {
+        font-size: 35px;
+        font-weight:bold;
+        width: 150px;
+        height:150px;
+        border-radius:75px 75px;
+    }
+
+/* order queue*/
+.order-queue {
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    top: 40px;
+    bottom: 0px;
+}
+
+    .order-queue .queue-title {
+        height: 40px;
+        width: 100%;
+        background-color: #765d00;
+        color: white;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: center;
+        vertical-align: text-bottom;
+    }
+
+        .order-queue .queue-title .badge {
+            font-size: 20px;
+            font-weight: normal;
+            background-color: #d9534f;
+        }
+
+    .order-queue .queue-content {
+        position: absolute;
+        width: 100px;
+        top: 40px;
+        bottom: 0px;
+        right: 0px;
+        color: #000;
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        overflow-y: auto;
+        border-left: 1px solid #b38d00;
+    }
+
+        .order-queue .queue-content .order-number:nth-child(2n) {
+            background-color: #cfc49c;
+        }

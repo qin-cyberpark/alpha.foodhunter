@@ -12,10 +12,10 @@ var paths = {
     content: "./Content/"
 };
 
-paths.js = paths.content + "js/**/*.js";
-paths.minJs = paths.content + "js/**/*.min.js";
-paths.css = paths.content + "css/**/*.css";
-paths.minCss = paths.content + "css/**/*.min.css";
+paths.js = paths.content + "js/customer/**/*.js";
+paths.minJs = paths.content + "js/customer/**/*.min.js";
+paths.css = paths.content + "css/customer/**/*.css";
+paths.minCss = paths.content + "css/customer/**/*.min.css";
 paths.concatJsDest = paths.content + "dist/js/site.min.js";
 paths.concatCssDest = paths.content + "dist/css/site.min.css";
 

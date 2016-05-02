@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html  ng-app="food-hunters-counter">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <link href="~/Content/img/columbus/icon.jpeg" rel="apple-touch-icon" sizes="120x120" />
+    <link href="~/Content/img/columbus/icon.jpe" rel="apple-touch-icon" sizes="152x152" />
+    <link rel="shortcut icon" href="~/Content/img/columbus/map-marker.png" />
+    <title>Columbus Counter</title>
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        <link rel="stylesheet" href="~/Content/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/Content/css/counter/main.css" />
+        <link rel="stylesheet" href="~/Content/css/counter/queue.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/Content/dist/css/site-counter.min.css" />
+    }
+</head>
+<body>
+    <div class="page" ng-controller="counterController as cntrCtrl" ng-init="cntrCtrl.init()">
+        <div class="left-side-bar">
+            <div class="menu-item">Orders</div>
+            <hr/>
+            <div class="menu-item">Statistic</div>
+        </div>
+        <div class="content">
+            <div class="top-bar">
+                <a id="left-side-bar-toggle" href="#"><img src="~/Content/img/columbus/logo-blk.png" /></a>
+            </div>
+            <div class="main-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        <script src="~/Content/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/Content/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/Content/lib/angular/angular.min.js"></script>
+        <script src="~/Content/lib/plug-in/jquery.signalR-2.2.0.min.js"></script>
+        <script src="/signalr/hubs"></script>
+        <script src="~/Content/js/counter/main.js"></script>
+        <script src="~/Content/js/counter/controllers/counter-controller.js"></script>
+    }
+    else
+    {
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.2.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <script src="~/Content/dist/js/site-counter.min.js"></script>
+    }
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#left-side-bar-toggle").click(function (e) {
+            e.preventDefault();
+            $(".page").toggleClass("toggled");
+        });
+    </script>
+    @RenderSection("script", required: false)
+</body>
+</html>

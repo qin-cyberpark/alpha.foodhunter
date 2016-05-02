@@ -35,5 +35,25 @@ namespace FoodHunterAlpha.Controllers.api
             var items =  Store.Get(restId).Categories.Where(x => x.Id == cateId).FirstOrDefault().Items;
             return items;
         }
+
+        [Route("api/{restId}/order/queue")]
+        public IList<string> GetOrderIdsInQueue(int restId)
+        {
+            var items = Order.GetOrderIds(restId, false);
+            return items;
+        }
+
+        [Route("api/{restId}/order/{id}")]
+        public Order GetOrderById(string id)
+        {
+            return Order.GetOrder(id);
+        }
+
+        [HttpGet]
+        [Route("api/{restId}/complete/{id}")]
+        public bool CompleteOrderById(string id)
+        {
+            return Order.CompleteOrder(id);
+        }
     }
 }
