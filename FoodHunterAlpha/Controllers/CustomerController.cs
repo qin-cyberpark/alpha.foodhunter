@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
 using FoodHunterAlpha.Models;
+using FoodHunterAlpha.Printer;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace FoodHunterAlpha.Controllers
 {
@@ -81,11 +84,12 @@ namespace FoodHunterAlpha.Controllers
                 order.TableNumber = tblNoOrMins;
             }
             order.CustomerId = Store.DefaultCustomerId;
-            order.Store = Store.Get(storeId);
+            var store = Store.Get(storeId);
+            order.Store = store;
 
             //item
             var cart = JsonConvert.DeserializeObject<ViewModels.CartVM>(orderRawData);
-            foreach(var itm in cart.Items)
+            foreach (var itm in cart.Items)
             {
                 var nwItm = Store.GetItem(itm.Id);
                 order.Items.Add(new OrderItem()
@@ -104,8 +108,14 @@ namespace FoodHunterAlpha.Controllers
                 Response.Cookies.Add(myCookie);
             }
 
+            if (bool.Parse(ConfigurationManager.AppSettings["PrintOrder"]))
+            {
+                Task.Run(() => { store.PrintOrder(order); });
+            }
+
             //push order
             MessageCenter.LoadOrderQueue();
+
 
             return RedirectToAction("YourOrders");
         }

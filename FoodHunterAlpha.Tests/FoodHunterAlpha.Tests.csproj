@@ -55,6 +55,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
@@ -68,6 +69,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FoodHunterAlpha.Printer\FoodHunterAlpha.Printer.csproj">
+      <Project>{f24a8c98-f843-485f-9b4b-7d5514570d0d}</Project>
+      <Name>FoodHunterAlpha.Printer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FoodHunterAlpha\FoodHunterAlpha.csproj">
       <Project>{5298407A-8DD6-4D88-87CE-892ABF7E2FF2}</Project>
       <Name>FoodHunterAlpha</Name>

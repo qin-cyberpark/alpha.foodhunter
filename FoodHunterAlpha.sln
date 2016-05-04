@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodHunterAlpha", "FoodHunt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodHunterAlpha.Tests", "FoodHunterAlpha.Tests\FoodHunterAlpha.Tests.csproj", "{665451C1-8AE1-4AB8-8910-A18EF036F7CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodHunterAlpha.Printer", "FoodHunterAlpha.Printer\FoodHunterAlpha.Printer.csproj", "{F24A8C98-F843-485F-9B4B-7D5514570D0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{665451C1-8AE1-4AB8-8910-A18EF036F7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{665451C1-8AE1-4AB8-8910-A18EF036F7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{665451C1-8AE1-4AB8-8910-A18EF036F7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F24A8C98-F843-485F-9B4B-7D5514570D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24A8C98-F843-485F-9B4B-7D5514570D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24A8C98-F843-485F-9B4B-7D5514570D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24A8C98-F843-485F-9B4B-7D5514570D0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

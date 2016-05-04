@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FoodHunterAlpha.Printer;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -26,6 +28,7 @@ namespace FoodHunterAlpha.Models
         public int TableNumber { get; set; }
         public DateTime PickupTime { get; set; }
         public bool HasCompleted { get; set; }
+        public string PrintContentId { get; set; }
         public DateTime PrintTime
         {
             get
@@ -41,6 +44,27 @@ namespace FoodHunterAlpha.Models
             }
         }
 
+        public decimal Total
+        {
+            get
+            {
+                decimal ttl = 0;
+                foreach (var item in Items)
+                {
+                    ttl += item.Item.Price * item.Quantity;
+                }
+
+                return ttl;
+            }
+        }
+
+        public decimal GST
+        {
+            get
+            {
+                return Total / 1.15M * 0.15M;
+            }
+        }
 
         //static
         private static SortedList<string, Order> _orders = new SortedList<string, Order>();
@@ -51,7 +75,7 @@ namespace FoodHunterAlpha.Models
             lock (_locker)
             {
                 int currSn = _orders.Values.OrderByDescending(x => x.OrderTime)
-                            .FirstOrDefault(x=>x.OrderTime.Date == DateTime.Today)?.SerialNo ?? 0;
+                            .FirstOrDefault(x => x.OrderTime.Date == DateTime.Today)?.SerialNo ?? 0;
                 return ++currSn;
             }
         }
@@ -89,7 +113,7 @@ namespace FoodHunterAlpha.Models
 
         public static IList<string> GetOrderIds(int restId, bool hasCompleted = false)
         {
-            return _orders.Values.Where(x=>x.HasCompleted == hasCompleted)
+            return _orders.Values.Where(x => x.HasCompleted == hasCompleted)
                 .OrderBy(x => x.PrintTime).Select(x => x.Id).ToList();
         }
 

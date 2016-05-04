@@ -1,4 +1,5 @@
 ﻿using FoodHunterAlpha.Models;
+using FoodHunterAlpha.Printer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace FoodHunterAlpha.Models
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public IList<Category> Categories { get; set; }
+        public string PrinterAddress { get; set; } = "67bfaa0f72c03202";
+        public int PrinterUserId { get; set; } = 48952;
+        public MemoBirdClient PrintClient { get; set; }
 
         public Restaurant ShallowCopy()
         {
@@ -57,12 +61,12 @@ namespace FoodHunterAlpha.Models
                 {
                     ItemOptionGroup optGrp = null;
                     var opts = db.menu_item_option.Where(x => x.rest_id == restId && x.item_id == item.Id)
-                        .OrderBy(x=>x.option_group_id).ToList();
+                        .OrderBy(x => x.option_group_id).ToList();
                     foreach (var opt in opts)
                     {
                         if (optGrp == null || opt.option_group_id != optGrp.GroupId)
                         {
-                            if(optGrp != null)
+                            if (optGrp != null)
                             {
                                 item.OptionGroups.Add(optGrp);
                             }
@@ -92,9 +96,9 @@ namespace FoodHunterAlpha.Models
             return rest;
         }
 
-        public long GetCategoryId (string nameId)
+        public long GetCategoryId(string nameId)
         {
-            foreach(var cate in Categories)
+            foreach (var cate in Categories)
             {
                 if (cate.NameId.Equals(nameId))
                 {
@@ -104,6 +108,22 @@ namespace FoodHunterAlpha.Models
 
             return 0;
         }
+
+        public bool PrintOrder(Order order)
+        {
+            //print order
+            var rep = PrintClient.Print(PrinterAddress, PrinterUserId, new Receipt(order).Image);
+            if(rep != null && rep.Succeeded)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 
     public class Category
@@ -145,7 +165,7 @@ namespace FoodHunterAlpha.Models
 
     public class ItemOptionGroup
     {
-        public int GroupId { get; set;  }
+        public int GroupId { get; set; }
         public long ItemId { get; set; }
         public Item Item { get; set; }
         public IList<ItemOption> ItemOptions { get; set; }
@@ -162,7 +182,7 @@ namespace FoodHunterAlpha.Models
         public string Description { get { return _data.option_desc; } }
         public long ItemId { get { return _data.item_id.Value; } }
         public Item Item { get; set; }
-        public int GroupId { get { return _data.option_group_id.Value; } } 
+        public int GroupId { get { return _data.option_group_id.Value; } }
         public decimal Diff { get { return _data.price_difference.Value; } }
         public bool IsDefault
         {
@@ -254,7 +274,9 @@ namespace FoodHunterAlpha.Models
         {
             InitStores();
         }
-        
+
+
+
         private static void InitStores()
         {
             _storesByName = new SortedList<string, Restaurant>();
@@ -266,7 +288,7 @@ namespace FoodHunterAlpha.Models
                 var rest = Restaurant.Get(db, DefaultRestaurantId);
                 foreach (var cate in rest.Categories)
                 {
-                    foreach(var item in cate.Items)
+                    foreach (var item in cate.Items)
                     {
                         _itemsById.Add(item.Id, item);
                     }
@@ -279,10 +301,13 @@ namespace FoodHunterAlpha.Models
                     restCpy.Name = arr[2];
                     restCpy.Latitude = double.Parse(arr[0]);
                     restCpy.Longitude = double.Parse(arr[1]);
-                    foreach(var cate in restCpy.Categories) {
+                    foreach (var cate in restCpy.Categories)
+                    {
                         cate.RestaurantId = restCpy.Id;
                         cate.Restaurant = restCpy;
                     }
+                    restCpy.PrintClient = new MemoBirdClient(System.Configuration.ConfigurationManager.AppSettings["PrinterAccessKey"]);
+
                     _storesByName.Add(restCpy.NameId, restCpy);
                     _storesById.Add(idx, restCpy);
                 }
@@ -292,7 +317,7 @@ namespace FoodHunterAlpha.Models
         {
             get
             {
-                if(_storesByName == null)
+                if (_storesByName == null)
                 {
                     InitStores();
                 }
@@ -307,7 +332,7 @@ namespace FoodHunterAlpha.Models
                 return null;
             }
 
-            if(_storesByName == null)
+            if (_storesByName == null)
             {
                 InitStores();
             }
@@ -335,9 +360,9 @@ namespace FoodHunterAlpha.Models
             return null;
         }
 
-        public static Item GetItem (long id)
+        public static Item GetItem(long id)
         {
-            if(_itemsById == null)
+            if (_itemsById == null)
             {
                 InitStores();
             }
