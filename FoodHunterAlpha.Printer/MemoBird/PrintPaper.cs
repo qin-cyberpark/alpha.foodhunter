@@ -12,8 +12,8 @@ namespace FoodHunterAlpha.Printer
         public PrintPaperRequest(string accessKey, string printerId, int userId, string content) : base(accessKey, "printpaper")
         {
             Parameters.Add(new KeyValuePair<string, string>("memobirdID", printerId));
-            Parameters.Add(new KeyValuePair<string, string>("userID", userId.ToString()));
             Parameters.Add(new KeyValuePair<string, string>("printcontent", content));
+            //Parameters.Add(new KeyValuePair<string, string>("userID", userId.ToString()));
         }
     }
 

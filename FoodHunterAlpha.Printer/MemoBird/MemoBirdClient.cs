@@ -25,6 +25,7 @@ namespace FoodHunterAlpha.Printer
         {
             using (HttpResponseMessage response = _client.PostAsync(request.RequestUrl,
                                                         new FormUrlEncodedContent(request.Parameters)).Result)
+                                                        //new CompressedContent(new FormUrlEncodedContent(request.Parameters), "gzip")).Result)
             {
                 if (response.IsSuccessStatusCode)
                 {

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MemoBird\Base.cs" />
+    <Compile Include="MemoBird\CompressedContent.cs" />
     <Compile Include="MemoBird\MemoBirdClient.cs" />
     <Compile Include="MemoBird\PrintPaper.cs" />
     <Compile Include="MemoBird\PrintStatus.cs" />
