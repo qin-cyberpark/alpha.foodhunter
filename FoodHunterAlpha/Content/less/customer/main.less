@@ -1,0 +1,159 @@
+﻿/* global */
+@import "_variables.less";
+
+html, body {
+    margin: 0px auto;
+    padding: 0px;
+    height: 100%;
+    max-width: @app-max-width;
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: @body-bg;
+}
+
+a,
+a:link,
+a:hover,
+a:visited {
+    text-decoration: none;
+}
+
+/*overload bootstrap*/
+.btn-primary {
+    color:#000;
+    background-color: @coffee-lighter;
+    border-color: @coffee-dark;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.focus {
+        background-color: @coffee !important;
+        text-decoration: none;
+    }
+}
+
+
+/*store bar*/
+.store-bar {
+    position: fixed;
+    top: 0px;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    height: @store-bar-height;
+    text-align: center;
+    background-color: @coffee;
+    z-index: 100;
+
+    & > a {
+        position:relative;
+        top:0px;
+        color: #fff;
+    }
+
+    &.store-selected {
+        & > a {
+            color: #000;
+        }
+
+        background-color: @columbus-yellow;
+    }
+
+    & .store-info {
+        font-size: 12px;
+    }
+
+    & .btn-icon {
+        top: 6px;
+        margin-left: 6px;
+        font-size: 20px;
+    }
+}
+
+/*nav bar*/
+.nav-bar {
+    position: fixed;
+    width: 100%;
+    max-width: @app-max-width;
+    margin: 0px;
+    top: @store-bar-height;
+    height: @nva-bar-height;
+    background-color: white;
+    z-index: 100;
+    display: -webkit-flex;
+    display: flex;
+
+    & > div {
+        text-align: center;
+        -webkit-flex: 1;
+        flex: 1;
+    }
+    //button
+    & .nav-btn {
+        color: @gray-light;
+        vertical-align: text-bottom;
+        font-weight: bold;
+
+        &:hover,
+        &:focus,
+        &:active,
+        &.focus,
+        &.active {
+            color: @coffee;
+            text-decoration: none;
+
+            & > img {
+                -webkit-filter: grayscale(0%);
+                filter: grayscale(0%);
+            }
+        }
+        //img
+        & > img {
+            height: 22px;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+        }
+        //label
+        & .btn-label {
+            display: block;
+            font-size: 11px;
+        }
+
+        & .btn-icon {
+            font-size: 20px;
+        }
+
+        & .badge-amount {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #d9534f;
+        }
+    }
+}
+
+/*body content*/
+.page-content {
+    position: fixed;
+    width: 100%;
+    top: @nva-bar-height + @store-bar-height;
+    max-width: @app-max-width;
+    bottom: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* map */
+.map-marker-info {
+    text-align: center;
+    font-weight: bold;
+}
+
+    .map-marker-info > a {
+        display: block;
+    }

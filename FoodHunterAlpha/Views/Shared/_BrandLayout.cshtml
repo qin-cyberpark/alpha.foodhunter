@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+@{
+    var brandNameId = ViewBag.BrandNameId;
+}
+@section stylesheet{
+    @RenderSection("stylesheet", required: false)
+}
+
+@section nav_bar{
+    <div>
+        <a js-href="/brand/@brandNameId" class="nav-btn @("BrandHome".Equals(ViewBag.PageName)?"active":"")">
+            <span class="btn-label">Columbus</span>
+            <img src="~/Image/columbus/map-marker.png" />
+        </a>
+    </div>
+    <div>
+        <a js-href="/brand/@brandNameId/map" class="nav-btn @("Map".Equals(ViewBag.PageName)?"active":"")">
+            <span class="btn-label">Stores</span>
+            <span class="glyphicon glyphicon-map-marker btn-icon"></span>
+        </a>
+    </div>
+}
+@RenderBody()
+
+@section script{
+    @RenderSection("script", required: false)
+}

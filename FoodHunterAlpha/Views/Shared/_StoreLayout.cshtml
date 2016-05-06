@@ -1,0 +1,52 @@
+﻿@using FoodHunterAlpha.Models;
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    Restaurant _store = (Restaurant)ViewBag.Store;
+    if (_store == null)
+    {
+        var lastStore = Request.Cookies["LastVisitedStoreNameId"]?.Value;
+        if (!string.IsNullOrEmpty(lastStore))
+        {
+            _store = Store.Get(lastStore);
+        }
+    }
+}
+@section stylesheet{
+    @RenderSection("stylesheet", required: false)
+}
+
+@section nav_bar{
+    <div>
+        <a js-href="/store/@_store.NameId" class="nav-btn @("StoreHome".Equals(ViewBag.PageName) ? "active" : "")">
+            <span class="btn-label">Home</span>
+            <span class="glyphicon glyphicon-home btn-icon"></span>
+        </a>
+    </div>
+    <div>
+        <div class="dropdown nav-dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle nav-btn  @("Menu".Equals(ViewBag.PageName) ? "active" : "")">
+                <span class="btn-label">Menu</span>
+                <span class="glyphicon glyphicon-list-alt btn-icon"></span>
+            </a>
+            <ul class="dropdown-menu">
+                @foreach (var cate in _store.Categories)
+                {
+                    <li><a js-href="/store/@_store.NameId/menu/@cate.NameId">@cate.Description</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div>
+        <a js-href="/account/cart" class="nav-btn @("Cart".Equals(ViewBag.PageName) ? "active" : "")">
+            <span class="btn-label">Meal</span>
+            <span class="glyphicon glyphicon-cutlery btn-icon">
+                <span class="badge badge-amount" ng-if="storeCtrl.cart.qty>0">{{storeCtrl.cart.qty}}</span>
+            </span>
+        </a>
+    </div>
+}
+@RenderBody()
+
+@section script{
+    @RenderSection("script", required: false)
+}

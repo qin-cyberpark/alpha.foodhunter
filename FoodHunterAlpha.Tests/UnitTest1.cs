@@ -46,7 +46,8 @@ namespace FoodHunterAlpha.Tests
 
             var c = new MemoBirdClient("87810a141cd74d1ca3a6511ab9ca8400");
 
-            var ra = c.Print("67bfaa0f72c03202", 489520, r.Image);
+            var ra = c.Print("67bfaa0f72c03202", 48952, r.Image);
+            Assert.IsTrue(ra.Succeeded);
         }
     }
 }
