@@ -1,0 +1,26 @@
+﻿@import "_variables.less";
+
+/*overload bootstrap*/
+.btn-primary {
+    background-color: #ffca00;
+    border-color: #b38d00;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.focus {
+        background-color: #ffca00 !important;
+    }
+}
+
+.nav-bar {
+    & .nav-btn {
+        &:hover,
+        &:focus,
+        &:active,
+        &.focus,
+        &.active {
+            color: #ffca00;
+        }
+    }
+}

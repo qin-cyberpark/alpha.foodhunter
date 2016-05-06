@@ -1,109 +1,140 @@
-﻿/*global*/
-html, body {
-    max-width: 960px;
-    margin: 0px auto;
-    padding: 0px;
-    overflow: hidden;
-    background-color:#f0f0f0;
+/* global */
+html,
+body {
+  margin: 0px auto;
+  padding: 0px;
+  height: 100%;
+  max-width: 960px;
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #f0f0f0;
 }
-
 a,
 a:link,
 a:hover,
 a:visited {
-    text-decoration: none;
+  text-decoration: none;
 }
-
-.dropdown-menu {
-    top: 90%;
+/*overload bootstrap*/
+.btn-primary {
+  color: #000;
+  background-color: #a27250;
+  border-color: #5e422f;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.focus {
+  background-color: #805a3f !important;
+  text-decoration: none;
 }
 /*store bar*/
-.top-nav-store-bar {
-    position: fixed;
-    top: 0px;
-    max-width: 960px;
-    width: 100%;
-    margin: 0 auto;
-    height: 25px;
-    text-align: center;
-    background-color: #ffca00;
-    z-index: 100;
+.store-bar {
+  position: fixed;
+  top: 0px;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  height: 30px;
+  text-align: center;
+  background-color: #805a3f;
+  z-index: 100;
 }
-
-    .top-nav-store-bar .store-info {
-        color: black;
-        font-size: 16px;
-    }
-
-    .top-nav-store-bar .btn-icon {
-        color: #8D8D8D;
-        font-size: 16px;
-    }
-
-/*top nav bar*/
-.top-nav-bar {
-    position: fixed;
-    top: 25px;
-    width: 100%;
-    max-width: 960px;
-    margin: 0 auto;
-    height: 40px;
-    padding: 0px 5px 0px 5px;
-    margin: 0px;
-    display: flex;
-    background-color: white;
-    z-index: 100;
+.store-bar > a {
+  position: relative;
+  top: 0px;
+  color: #fff;
 }
-
-    .top-nav-bar .nav-dropdown {
-        text-align: center;
-        flex: 1;
-    }
-
-    .top-nav-bar .nav-btn {
-        display: inline-block;
-        padding: 0;
-        margin: 0;
-        color: #8D8D8D;
-        text-align: center;
-        vertical-align: text-bottom;
-        flex: 1;
-        font-weight: bold;
-    }
-
-        .top-nav-bar .nav-btn.active {
-            color: #ffca00;
-        }
-
-    .top-nav-bar .btn-label {
-        display: block;
-        font-size: 11px;
-    }
-
-    .top-nav-bar span.btn-icon {
-        font-size: 20px;
-    }
-
-    .top-nav-bar .badge-amount {
-        position: absolute;
-        top: -5px;
-        right: -10px;
-        background-color: #d9534f;
-    }
-
-.map-content {
-    width: 100%;
-    max-width: 960px;
-    top: 65px;
-    position: fixed;
-    bottom: 0px;
+.store-bar.store-selected {
+  background-color: #ffca00;
 }
-
+.store-bar.store-selected > a {
+  color: #000;
+}
+.store-bar .store-info {
+  font-size: 12px;
+}
+.store-bar .btn-icon {
+  top: 6px;
+  margin-left: 6px;
+  font-size: 20px;
+}
+/*nav bar*/
+.nav-bar {
+  position: fixed;
+  width: 100%;
+  max-width: 960px;
+  margin: 0px;
+  top: 30px;
+  height: 40px;
+  background-color: white;
+  z-index: 100;
+  display: -webkit-flex;
+  display: flex;
+}
+.nav-bar > div {
+  text-align: center;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.nav-bar .nav-btn {
+  color: #aaaaaa;
+  vertical-align: text-bottom;
+  font-weight: bold;
+}
+.nav-bar .nav-btn:hover,
+.nav-bar .nav-btn:focus,
+.nav-bar .nav-btn:active,
+.nav-bar .nav-btn.focus,
+.nav-bar .nav-btn.active {
+  color: #805a3f;
+  text-decoration: none;
+}
+.nav-bar .nav-btn:hover > img,
+.nav-bar .nav-btn:focus > img,
+.nav-bar .nav-btn:active > img,
+.nav-bar .nav-btn.focus > img,
+.nav-bar .nav-btn.active > img {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+.nav-bar .nav-btn > img {
+  height: 22px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+.nav-bar .nav-btn .btn-label {
+  display: block;
+  font-size: 11px;
+}
+.nav-bar .nav-btn .btn-icon {
+  font-size: 20px;
+}
+.nav-bar .nav-btn .badge-amount {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #d9534f;
+}
+/*body content*/
 .page-content {
-    width: 100%;
-    max-width: 960px;
-    top: 65px;
-    position: fixed;
-    bottom: 0px;
-    overflow: auto;
+  position: fixed;
+  width: 100%;
+  top: 70px;
+  max-width: 960px;
+  bottom: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+/* map */
+.map-marker-info {
+  text-align: center;
+  font-weight: bold;
+}
+.map-marker-info > a {
+  display: block;
 }

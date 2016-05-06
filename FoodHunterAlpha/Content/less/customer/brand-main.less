@@ -1,0 +1,26 @@
+﻿@import "_variables.less";
+
+/*overload bootstrap*/
+.btn-primary {
+    background-color: @columbus-yellow;
+    border-color: @columbus-yellow-darker;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.focus {
+        background-color:@columbus-yellow-darker !important;
+    }
+}
+
+.nav-bar {
+    & .nav-btn {
+        &:hover,
+        &:focus,
+        &:active,
+        &.focus,
+        &.active {
+            color: @columbus-yellow;
+        }
+    }
+}

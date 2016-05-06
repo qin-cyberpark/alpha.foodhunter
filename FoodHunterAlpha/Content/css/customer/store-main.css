@@ -1,0 +1,18 @@
+/*overload bootstrap*/
+.btn-primary {
+  background-color: #ffca00;
+  border-color: #b38d00;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.focus {
+  background-color: #ffca00 !important;
+}
+.nav-bar .nav-btn:hover,
+.nav-bar .nav-btn:focus,
+.nav-bar .nav-btn:active,
+.nav-bar .nav-btn.focus,
+.nav-bar .nav-btn.active {
+  color: #ffca00;
+}

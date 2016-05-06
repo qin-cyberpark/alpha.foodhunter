@@ -1,0 +1,122 @@
+﻿@using FoodHunterAlpha.Models;
+@{
+    Restaurant _store = (Restaurant)ViewBag.Store;
+    if (_store == null)
+    {
+        var lastStore = Request.Cookies["LastVisitedStoreNameId"]?.Value;
+        if (!string.IsNullOrEmpty(lastStore))
+        {
+            _store = Store.Get(lastStore);
+        }
+    }
+}
+<!DOCTYPE html>
+<html ng-app="food-hunters">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="description" content="Coffee Hunter">
+    <meta name="author" content="Coffee Hunter">
+    <title>Coffee Hunter</title>
+    <link rel="shortcut icon" href="~/Content/img/logo.png" />
+    <link href="~/Content/img/logo.png" rel="apple-touch-icon" sizes="120x120" />
+    <link href="~/Content/img/logo.png" rel="apple-touch-icon" sizes="152x152" />
+
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/main.less" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/platform-main.less" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/platform-brands.less" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/brand-main.less" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/store-main.less" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/store-menu.less" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/account-cart.less" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/account-checkout.less" />
+        <link rel="stylesheet/less" type="text/css" href="~/Content/less/customer/account-orders.less" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/Content/dist/css/site-customer.min.css" />
+    }
+    @RenderSection("stylesheet", required: false)
+
+</head>
+<body ng-controller="storeController as storeCtrl" ng-init="storeCtrl.init()">
+
+    @if (_store != null)
+    {
+        <div class="store-bar store-selected">
+            <a js-href="/store/@_store.NameId" class="store-info">
+                @_store.Name
+            </a>
+            <a href="#">
+                <span class="glyphicon glyphicon-info-sign btn-icon"></span>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="store-bar">
+            <a js-href="/map">
+                <span class="store-info">look for a cafe</span>
+                <span class="glyphicon glyphicon-search btn-icon"></span>
+            </a>
+        </div>
+    }
+
+    <div class="nav-bar">
+        <div>
+            <a js-href="/" class="nav-btn @("PlatformHome".Equals(ViewBag.PageName)?"active":"")">
+                <span class="btn-label">FoodHunter</span>
+                <img src="~/Content/img/logo.png" />
+            </a>
+        </div>
+        @RenderSection("nav_bar")
+        <div>
+            <div class="dropdown nav-dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle nav-btn  @("Account".Equals(ViewBag.PageName)?"active":"")">
+                    <span class="btn-label">Me</span>
+                    <span class="glyphicon glyphicon-user btn-icon"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#">My Account</a></li>
+                    <li><a js-href="/account/orders">My Orders</a></li>
+                    <li><hr style="margin:0px;" /></li>
+                    <li><a href="#">Not Demo? Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        @RenderBody()
+    </div>
+
+    <script src="~/Content/lib/js-cookie/src/js.cookie.js"></script>
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        <script src="~/Content/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/Content/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/Content/lib/angular/angular.min.js"></script>
+        <script src="~/Content/lib/less/dist/less.min.js"></script>
+        <script src="~/Content/js/customer/main.js"></script>
+        <script src="~/Content/js/customer/controllers/store-controller.js"></script>
+        <script src="~/Content/js/customer/controllers/item-controller.js"></script>
+    }
+    else
+    {
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.2.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <script src="~/Content/dist/js/site-customer.min.js"></script>
+    }
+    @RenderSection("script", required: false)
+</body>
+</html>

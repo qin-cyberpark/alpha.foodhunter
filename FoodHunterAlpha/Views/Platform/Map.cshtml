@@ -1,0 +1,9 @@
+﻿@{
+    Layout = "~/Views/Shared/_PlatformLayout.cshtml";
+}
+<div id="map" style="height:100%"></div>
+@section script{
+    <script src="~/Content/dist/js/store-map/store-map.js"></script>
+    <script src="~/Content/dist/js/store-map/marker-list-all.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=showMap" async defer></script>
+}

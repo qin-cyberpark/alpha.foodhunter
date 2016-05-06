@@ -1,0 +1,14 @@
+body {
+  background-color: #fff;
+}
+.brand-grid > div {
+  padding: 0;
+  margin: 0;
+}
+.brand-grid .brand-cell {
+  margin-top: 10px;
+  text-align: center;
+}
+.brand-grid .brand-cell img {
+  width: 150px;
+}

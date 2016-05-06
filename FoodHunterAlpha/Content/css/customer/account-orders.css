@@ -1,0 +1,33 @@
+.order-item {
+  margin: 10px 15px 0px 15px;
+  padding-bottom: 2px;
+  vertical-align: middle;
+}
+.order-item:nth-child(n+2) {
+  margin: 0px 15px 0px 15px;
+  padding: 5px 0px 3px 0px;
+  border-top: 1px dashed #d8d8d8;
+}
+.order-item .order-item-desc {
+  display: inline-block;
+  line-height: 15px;
+}
+.order-item .order-item-desc .desc-order-id {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+}
+.order-item .order-item-desc .desc-store {
+  display: block;
+  font-size: 11px;
+  color: #8d8d8d;
+}
+.order-item .order-item-desc .desc-type {
+  font-size: 11px;
+  color: #ff4a00;
+}
+.order-item .order-item-status {
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+}

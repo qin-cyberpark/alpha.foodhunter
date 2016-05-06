@@ -1,0 +1,23 @@
+﻿@using FoodHunterAlpha.Models;
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+    var _store = (Restaurant)ViewBag.Store;
+    var _cateId = (int)ViewBag.CategoryId;
+}
+
+<div class="page-content">
+    <div class="menu" ng-controller="itemController as itemCtrl" ng-init="itemCtrl.init(@_store.Id,@_cateId)">
+        <div class="col-xs-6 col-sm-4 menu-item" ng-repeat="item in itemCtrl.items">
+            <!--div class="item-top">&nbsp;</div-->
+            <div class="item-middle" style="background:url(/image/columbus/product/latte.jpg);
+            background-size:auto 175px;background-repeat:no-repeat;background-position: center; ">
+                <div class="item-middle-girdle">
+                    <span class="item-name">{{item.description}}</span>
+                    <span class="item-price">{{item.price|currency:$}}</span>
+                    <a ng-click="storeCtrl.cart.add(item)" class="item-btn-add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <!--div class="item-bottom"></div-->
+        </div>
+    </div>
+</div>
