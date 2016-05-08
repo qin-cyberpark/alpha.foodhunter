@@ -17,13 +17,19 @@ namespace FoodHunterAlpha.Controllers
 
         public ActionResult Map()
         {
-            ViewBag.PageName = "Map";
+            ViewBag.PageName = "PlatformHome";
             return View();
         }
 
         public ActionResult Brands()
         {
-            ViewBag.PageName = "Brands";
+            ViewBag.PageName = "PlatformHome";
+            return View();
+        }
+
+        public ActionResult Nearby()
+        {
+            ViewBag.PageName = "Nearby";
             return View();
         }
     }

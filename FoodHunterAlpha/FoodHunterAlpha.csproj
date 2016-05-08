@@ -1128,6 +1128,7 @@
     <Content Include="Views\Shared\_PlatformLayout.cshtml" />
     <Content Include="Views\Brand\Map.cshtml" />
     <Content Include="Views\Shared\_StoreLayout.cshtml" />
+    <Content Include="Views\Platform\Nearby.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

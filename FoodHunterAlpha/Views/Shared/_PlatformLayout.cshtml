@@ -8,18 +8,11 @@
 
 @section nav_bar{
     <div>
-        <a js-href="/map" class="nav-btn @("Map".Equals(ViewBag.PageName)?"active":"")">
-            <span class="btn-label">Cafes</span>
+        <a js-href="/nearby" class="nav-btn @("Nearby".Equals(ViewBag.PageName)?"active":"")">
+            <span class="btn-label">Nearby</span>
             <span class="glyphicon glyphicon-map-marker btn-icon"></span>
         </a>
     </div>
-    <div>
-        <a js-href="/brands" class="nav-btn @("Brands".Equals(ViewBag.PageName)?"active":"")">
-            <span class="btn-label">Brands</span>
-            <span class="glyphicon glyphicon-tag btn-icon"></span>
-        </a>
-    </div>
-
 }
 @RenderBody()
 

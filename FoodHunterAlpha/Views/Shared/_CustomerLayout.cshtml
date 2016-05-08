@@ -73,10 +73,17 @@
 
     <div class="nav-bar">
         <div>
-            <a js-href="/" class="nav-btn @("PlatformHome".Equals(ViewBag.PageName)?"active":"")">
-                <span class="btn-label">FoodHunter</span>
-                <img src="~/Content/img/logo.png" />
-            </a>
+            <div class="dropdown nav-dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle nav-btn  @("PlatformHome".Equals(ViewBag.PageName) ? "active" : "")">
+                    <span class="btn-label">???</span>
+                    <img src="~/Content/img/logo.png" />
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a js-href="/">Home</a></li>
+                    <li><a js-href="/map">Cafe Map</a></li>
+                    <li><a js-href="/brands">By Brand</a></li>
+                </ul>
+            </div>
         </div>
         @RenderSection("nav_bar")
         <div>
@@ -88,6 +95,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="#">My Account</a></li>
                     <li><a js-href="/account/orders">My Orders</a></li>
+                    <li><a href="#">My Favourite</a></li>
                     <li><hr style="margin:0px;" /></li>
                     <li><a href="#">Not Demo? Sign Out</a></li>
                 </ul>
@@ -104,18 +112,18 @@
     {
         <script src="~/Content/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/Content/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="~/Content/lib/angular/angular.min.js"></script>
-        <script src="~/Content/lib/less/dist/less.min.js"></script>
-        <script src="~/Content/js/customer/main.js"></script>
-        <script src="~/Content/js/customer/controllers/store-controller.js"></script>
-        <script src="~/Content/js/customer/controllers/item-controller.js"></script>
+            <script src="~/Content/lib/angular/angular.min.js"></script>
+            <script src="~/Content/lib/less/dist/less.min.js"></script>
+            <script src="~/Content/js/customer/main.js"></script>
+            <script src="~/Content/js/customer/controllers/store-controller.js"></script>
+            <script src="~/Content/js/customer/controllers/item-controller.js"></script>
     }
     else
     {
         <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.2.min.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-        <script src="~/Content/dist/js/site-customer.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+            <script src="~/Content/dist/js/site-customer.min.js"></script>
     }
     @RenderSection("script", required: false)
 </body>

@@ -7,18 +7,17 @@
 @section stylesheet{
     @RenderSection("stylesheet", required: false)
 }
-
 @section nav_bar{
     <div>
-        <a js-href="/brand/@brandNameId" class="nav-btn @("BrandHome".Equals(ViewBag.PageName)?"active":"")">
-            <span class="btn-label">Columbus</span>
-            <img src="~/Image/columbus/map-marker.png" />
+        <a js-href="/nearby" class="nav-btn">
+            <span class="btn-label">Nearby</span>
+            <span class="glyphicon glyphicon-map-marker btn-icon"></span>
         </a>
     </div>
     <div>
-        <a js-href="/brand/@brandNameId/map" class="nav-btn @("Map".Equals(ViewBag.PageName)?"active":"")">
-            <span class="btn-label">Stores</span>
-            <span class="glyphicon glyphicon-map-marker btn-icon"></span>
+        <a js-href="/brand/@brandNameId" class="nav-btn active">
+            <span class="btn-label">Columbus</span>
+            <img src="~/Image/columbus/map-marker.png" />
         </a>
     </div>
 }
